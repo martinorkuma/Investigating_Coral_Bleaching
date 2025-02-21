@@ -20,37 +20,21 @@ Definitions of key terms can be found [here.](https://coralreefwatch.noaa.gov/pr
 
 1. Data Processing and Cleaning
 
-2. Time Series Analysis of Sea Surface Temperature
+2. Time Series Analysis of Sea Surface Temperature: Plot SST trends over the years to identify long-term warming patterns.
 
-- Plot SST trends over the years to identify long-term warming patterns.
-- Compare SST trends with bleaching alert areas.
+3. Heatmap of SST & HotSpots: Create a geospatial heatmap of SST and hotspots to identify high-risk areas.
 
-3. Heatmap of SST & HotSpots
+4. Correlation Analysis: Assess the correlation between SST, hotspots, and bleaching alert areas.
 
-- Create a geospatial heatmap of SST and hotspots to identify high-risk areas.
-- Identify seasonal variations in SST and bleaching.
+5. Seasonal Trends in Coral Bleaching: Boxplots of SST and hotspots by month to understand seasonal patterns.
 
-4. Correlation Analysis
-
-- Assess the correlation between SST, hotspots, and bleaching alert areas.
-- Use scatter plots and regression analysis to examine relationships.
-
-5. Seasonal Trends in Coral Bleaching
-
-- Boxplots of SST and hotspots by month to understand seasonal patterns.
-- Identify peak bleaching seasons.
-
-6. Impact of Degree Heating Weeks (DHW) on Coral Bleaching
-
-- Visualize how DHW relates to bleaching alerts.
-- Identify threshold DHW values leading to mass bleaching events.
+6. Impact of Degree Heating Weeks (DHW) on Coral Bleaching: Visualize how DHW relates to bleaching alerts.
 
 7. Impact of Higher Temperatures on Coral Bleaching
-- Visualize how SST relates to bleaching alerts.
 
 ## Exploratory Data Analysis
 
-See document for complete exploratory data analysis.
+See file [Investigating_Coral_Bleaching](https://github.com/martinorkuma/Investigating_Coral_Bleaching/blob/main/Investigating_Coral_Bleaching.ipynb) for complete exploratory data analysis.
 
 ### Seasonal Trends in Sea Surface Temperature
 
