@@ -36,6 +36,33 @@ Definitions of key terms can be found [here.](https://coralreefwatch.noaa.gov/pr
 
 See file [Investigating_Coral_Bleaching](https://github.com/martinorkuma/Investigating_Coral_Bleaching/blob/main/Investigating_Coral_Bleaching.ipynb) for complete exploratory data analysis.
 
+### Analysis of Sea Surface Temperature Over Time
+
+```Python
+# Extract the year and calculate the yearly average SST
+df_yearly = df.groupby(df["Date"].dt.year)["Sea_Surface_Temperature"].mean().reset_index()
+
+# Rename columns for clarity
+df_yearly.rename(columns={"Date": "Year"}, inplace=True)
+
+# Plot the yearly average sea surface temperature
+plt.figure(figsize=(12, 6))
+sns.lineplot(data=df_yearly, x="Year", y="Sea_Surface_Temperature", label="Average SST per Year")
+
+# Add a trend line using Seaborn’s regplot (Linear Regression)
+sns.regplot(data=df_yearly, x="Year", y="Sea_Surface_Temperature", scatter=False, ci=None, color="red", label="Trend Line")
+
+plt.xlabel("Year")
+plt.ylabel("Sea Surface Temperature (°C)")
+plt.title("Yearly Average Sea Surface Temperature in Florida Keys")
+plt.legend()
+plt.grid(True)  # Optional for better readability
+plt.show()
+```
+
+![Temp over time](https://github.com/user-attachments/assets/840dbb3f-52eb-41f9-a7af-d7ce37b521e4)
+
+
 ### Seasonal Trends in Sea Surface Temperature
 
 The chart shows monthly variations in temperature across the year. 
