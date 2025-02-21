@@ -105,33 +105,27 @@ plt.show()
 **Rising Sea Surface Temperature (SST) Trends**
 
 - The time series analysis shows a clear upward trend in SST over the years, indicating long-term warming in the Florida Keys.
-- Seasonal fluctuations are evident, with higher SST values typically observed during the summer months.
 
 **Geospatial Hotspots for High Temperatures**
 
 - The heatmap visualization highlights specific geographic areas experiencing consistently higher SST levels, correlating with increased coral stress.
-- These high-temperature zones are more prone to experiencing frequent bleaching events.
 
 **Strong Correlation Between SST and Coral Bleaching**
 
 - A significant positive correlation exists between SST, hotspots, and bleaching alert areas, confirming that higher temperatures contribute to increased bleaching incidents.
-- The regression analysis indicates that as SST exceeds a critical threshold, bleaching alert levels rise sharply.
 
 **Seasonal Patterns of Bleaching Events**
 
 - Boxplot analysis reveals that bleaching alerts peak during warmer months, typically in late summer when SST reaches its highest levels.
-- This aligns with known coral bleaching patterns, reinforcing the impact of temperature stress.
-
+  
 **Degree Heating Weeks (DHW) as a Key Predictor**
 
 - The analysis of DHW shows that prolonged exposure to elevated temperatures plays a crucial role in triggering mass bleaching events.
-- Higher DHW values are closely linked to more severe bleaching alerts, suggesting that accumulated heat stress is a primary driver of coral bleaching.
 
 **Higher Temperatures Directly Cause Increased Bleaching**
 
 - The scatter plot and regression analysis of SST vs. bleaching alert areas confirm a clear trend: as SST rises, the number of bleaching alerts increases.
 - The fitted trendline demonstrates that bleaching events become more frequent and severe once SST crosses a critical threshold.
-- This finding supports global research showing that even small increases in ocean temperature can have devastating effects on coral ecosystems.
 
 ### Conclusion
 This analysis underscores the direct impact of rising sea surface temperatures on coral bleaching in the Florida Keys. The findings highlight the urgency of addressing climate change and implementing conservation strategies to mitigate further damage to coral reef ecosystems.
