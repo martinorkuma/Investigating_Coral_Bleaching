@@ -12,7 +12,7 @@ The objective of this analysis is to examine the relationship between sea surfac
 
 The dataset used in this project was compiled by the [National Oceanic and Atmospheric Administration](https://www.noaa.gov/) from 1985 to 2025. [Click to download the dataset.](https://www.nnvl.noaa.gov/Portal/Output/NOAA_CRW_5km_Regional_Virtual_Stations/Florida_Keys.csv)
 
-**Key Terms:**
+**Key Terms:** 
 
 Definitions of key terms can be found [here.](https://coralreefwatch.noaa.gov/product/5km/methodology.php#ssttrend)
 
@@ -37,6 +37,7 @@ Definitions of key terms can be found [here.](https://coralreefwatch.noaa.gov/pr
 See file [Investigating_Coral_Bleaching](https://github.com/martinorkuma/Investigating_Coral_Bleaching/blob/main/Investigating_Coral_Bleaching.ipynb) for complete exploratory data analysis.
 
 ### Analysis of Sea Surface Temperature Over Time
+Pending Python script. 
 
 ```Python
 # Extract the year and calculate the yearly average SST
