@@ -1,0 +1,24 @@
+# Jupyter
+.ipynb_checkpoints/
+.jupyter/
+.virtual_documents/
+
+# Python
+__pycache__/
+*.pyc
+.env
+.venv/
+
+# Editor/OS noise
+.DS_Store
+Thumbs.db
+
+# Outputs (keep folder, ignore generated files)
+output/*
+!output/.gitkeep
+
+# Optional: keep data structure but ignore raw data if you don't want to publish it
+# data/raw/*
+# !data/raw/.gitkeep
+# data/processed/*
+# !data/processed/.gitkeep
