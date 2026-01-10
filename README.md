@@ -1,136 +1,124 @@
 ![Coral Dashboard Snap](https://github.com/user-attachments/assets/f40b345c-9ece-41a3-824c-56f061cb0358)
 
-## Introduction
+## Project Overview ## 
 
-Coral bleaching is a significant environmental issue affecting marine ecosystems worldwide, particularly in regions like the Florida Keys. This phenomenon occurs when corals experience prolonged stress due to elevated sea surface temperatures, leading to the expulsion of their symbiotic algae, which provide essential nutrients and coloration. As ocean temperatures continue to rise due to climate change, the frequency and severity of coral bleaching events are increasing, posing a major threat to reef biodiversity and ecosystem health.
+Coral bleaching is a critical environmental challenge affecting reef ecosystems globally, with the Florida Keys among the most vulnerable and well-studied regions in the United States. Bleaching occurs when corals are exposed to prolonged thermal stress, primarily driven by elevated sea surface temperatures (SST), causing them to expel symbiotic algae that are essential for their nutrition and survival. Increasing ocean temperatures associated with climate change have intensified both the frequency and severity of bleaching events, threatening reef biodiversity, fisheries, and coastal protection.
 
-**Objective:**
+This project applies exploratory data analysis and visualization techniques to quantify long-term SST trends in the Florida Keys and to examine how thermal stress metrics relate to coral bleaching alerts. The analysis is designed to be reproducible and interpretable, providing insight into environmental drivers of coral stress and supporting climate and conservation research.
 
-The objective of this analysis is to examine the relationship between sea surface temperature (SST) and coral bleaching in the Florida Keys. Using historical data, from 1985 to 2025, this analysis identifies trends in SST over time, analyzes geospatial variations, and determines the correlation between SST, hotspots, and bleaching alert areas. This analysis aims to provide insights into how increasing ocean temperatures contribute to coral stress, helping inform conservation efforts and climate adaptation strategies.
+## Objectives: ##
 
-**Data Source:**
+The primary objectives of this analysis are to:
+- Quantify long-term trends in sea surface temperature in the Florida Keys (1985–2025)
 
-The dataset used in this project was compiled by the [National Oceanic and Atmospheric Administration](https://www.noaa.gov/) from 1985 to 2025. [Click to download the dataset.](https://www.nnvl.noaa.gov/Portal/Output/NOAA_CRW_5km_Regional_Virtual_Stations/Florida_Keys.csv)
+- Examine seasonal patterns in SST and identify periods of elevated thermal stress
 
-**Key Terms:** 
+- Visualize geospatial hotspots associated with high SST values
 
-Definitions of key terms can be found [here.](https://coralreefwatch.noaa.gov/product/5km/methodology.php#ssttrend)
+- Evaluate statistical relationships between SST, Degree Heating Weeks (DHW), hotspots, and bleaching alert areas
 
-### Key Analyses & Visualizations:
+- Assess how increasing temperatures and prolonged heat exposure contribute to coral bleaching risk
 
-1. Data Processing and Cleaning
+## Data Source: ##
 
-2. Time Series Analysis of Sea Surface Temperature: Plot SST trends over the years to identify long-term warming patterns.
+The dataset used in this project was compiled by the [National Oceanic and Atmospheric Administration](https://www.noaa.gov/) from 1985 to 2025. <br>   
 
-3. Heatmap of SST & HotSpots: Create a geospatial heatmap of SST and hotspots to identify high-risk areas.
-
-4. Correlation Analysis: Assess the correlation between SST, hotspots, and bleaching alert areas.
-
-5. Seasonal Trends in Coral Bleaching: Boxplots of SST and hotspots by month to understand seasonal patterns.
-
-6. Impact of Degree Heating Weeks (DHW) on Coral Bleaching: Visualize how DHW relates to bleaching alerts.
-
-7. Impact of Higher Temperatures on Coral Bleaching
-
-## Exploratory Data Analysis
-
-See file [Investigating_Coral_Bleaching](https://github.com/martinorkuma/Investigating_Coral_Bleaching/blob/main/Investigating_Coral_Bleaching.ipynb) for complete exploratory data analysis.
-
-### Analysis of Sea Surface Temperature Over Time
-Pending Python script. 
-
-```Python
-# Extract the year and calculate the yearly average SST
-df_yearly = df.groupby(df["Date"].dt.year)["Sea_Surface_Temperature"].mean().reset_index()
-
-# Rename columns for clarity
-df_yearly.rename(columns={"Date": "Year"}, inplace=True)
-
-# Plot the yearly average sea surface temperature
-plt.figure(figsize=(12, 6))
-sns.lineplot(data=df_yearly, x="Year", y="Sea_Surface_Temperature", label="Average SST per Year")
-
-# Add a trend line using Seaborn’s regplot (Linear Regression)
-sns.regplot(data=df_yearly, x="Year", y="Sea_Surface_Temperature", scatter=False, ci=None, color="red", label="Trend Line")
-
-plt.xlabel("Year")
-plt.ylabel("Sea Surface Temperature (°C)")
-plt.title("Yearly Average Sea Surface Temperature in Florida Keys")
-plt.legend()
-plt.grid(True)  # Optional for better readability
-plt.show()
-```
-
-![Temp over time](https://github.com/user-attachments/assets/840dbb3f-52eb-41f9-a7af-d7ce37b521e4)
+Download link: https://www.nnvl.noaa.gov/Portal/Output/NOAA_CRW_5km_Regional_Virtual_Stations/Florida_Keys.csv
 
 
-### Seasonal Trends in Sea Surface Temperature
+Definitions of key variables and methodological details are available in the NOAA Coral Reef Watch documentation: https://coralreefwatch.noaa.gov/product/5km/methodology.php#ssttrend  
+<br>
 
-The chart shows monthly variations in temperature across the year. 
-Each month is represented by a number, with 1 = January and 12 = December.
+ 
+## Key Variables ## 
+- Sea_Surface_Temperature (SST): Surface ocean temperature measured in degrees Celsius
 
-```Python
-# Compute the average temperature per month to define color mapping
-avg_temps = df.groupby("Month")["Sea_Surface_Temperature"].mean().sort_values()
+- HotSpots: Areas where SST exceeds climatological thresholds
 
-# Create a color palette where warmer months get warmer colors
-warm_palette = sns.color_palette("RdYlBu_r", len(avg_temps))  # Reversed to match warm-to-cool
+- Degree_Heating_Weeks (DHW): Cumulative thermal stress metric indicating prolonged exposure to elevated temperatures
 
-# Map months to their corresponding colors based on average temperature
-month_colors = {month: color for month, color in zip(avg_temps.index, warm_palette)}
+- Bleaching_Alert_Area: Spatial extent of bleaching alerts based on thermal stress thresholds
 
-plt.figure(figsize=(12, 6))
+- Date: Observation date
 
-sns.boxplot(
-    data=df, 
-    x='Month', 
-    y='Sea_Surface_Temperature', 
-    hue='Month', 
-    palette=month_colors  # Use our custom mapping
-)
-
-plt.xlabel("Month")
-plt.ylabel("Sea Surface Temperature (°C)")
-plt.title("Seasonal Trends in Sea Surface Temperature")
-
-plt.legend(title="Month", bbox_to_anchor=(1.05, 1), loc='upper left')  # Adjust legend position
-
-plt.show()
-
-```
-
-![Seasonal temp trend](https://github.com/user-attachments/assets/38ed507b-283d-47a2-a6cc-ffe4d41899b5)
-
-## Summary and Key Insights
-
-**Rising Sea Surface Temperature (SST) Trends**
-
-- The time series analysis shows a clear upward trend in SST over the years, indicating long-term warming in the Florida Keys.
-
-**Geospatial Hotspots for High Temperatures**
-
-- The heatmap visualization highlights specific geographic areas experiencing consistently higher SST levels, correlating with increased coral stress.
-
-**Strong Correlation Between SST and Coral Bleaching**
-
-- A significant positive correlation exists between SST, hotspots, and bleaching alert areas, confirming that higher temperatures contribute to increased bleaching incidents.
-
-**Seasonal Patterns of Bleaching Events**
-
-- Boxplot analysis reveals that bleaching alerts peak during warmer months, typically in late summer when SST reaches its highest levels.
+- Latitude / Longitude: Spatial coordinates for geospatial analysis    
   
-**Degree Heating Weeks (DHW) as a Key Predictor**
 
-- The analysis of DHW shows that prolonged exposure to elevated temperatures plays a crucial role in triggering mass bleaching events.
+## Analysis Workflow ##
 
-**Higher Temperatures Directly Cause Increased Bleaching**
+The analysis follows a structured workflow:
 
-- The scatter plot and regression analysis of SST vs. bleaching alert areas confirm a clear trend: as SST rises, the number of bleaching alerts increases.
-- The fitted trendline demonstrates that bleaching events become more frequent and severe once SST crosses a critical threshold.
+1. Data ingestion and cleaning
 
-### Conclusion
-This analysis underscores the direct impact of rising sea surface temperatures on coral bleaching in the Florida Keys. The findings highlight the urgency of addressing climate change and implementing conservation strategies to mitigate further damage to coral reef ecosystems.
+    - Parsing and validating date fields
 
-## References
+    - Ensuring numeric consistency across temperature and bleaching-related variables
 
+    - Deriving temporal features such as year and month
+
+2. Exploratory data analysis and visualization
+
+    - Time series analysis of SST
+
+    - Seasonal (monthly) SST distributions
+
+    - Geospatial visualization of SST patterns
+
+    - Correlation analysis among SST, DHW, hotspots, and bleaching alerts
+
+3. Impact assessment
+
+    - Relationship between Degree Heating Weeks and bleaching alert areas
+
+    - Relationship between elevated SST and bleaching severity  
+
+All visual outputs are programmatically generated and saved to a dedicated figs/ directory for reproducibility and reporting.
+
+A complete Python script with all exploratory analysis and visualization is available at: [data_cleaning_analysis_and_viz.py](https://github.com/martinorkuma/investigating_coral_bleaching/blob/main/scripts/data_cleaning_analysis_and_viz.py) 
+
+
+## Selected Analyses ##
+- #### Long-Term Sea Surface Temperature Trends ####  
+    Yearly SST averages were computed to identify long-term warming patterns. A linear regression trend line highlights a sustained increase in SST across the study period, consistent with regional climate warming.
+
+- #### Seasonal Sea Surface Temperature Patterns ####
+    Monthly SST distributions reveal strong seasonality, with peak temperatures occurring in late summer. These periods coincide with the highest observed bleaching alert frequencies.
+
+- #### Geospatial SST Hotspots #### 
+    Spatial scatter plots of SST across latitude and longitude identify persistent hotspots where corals are exposed to elevated thermal stress, indicating areas of heightened vulnerability.
+
+- #### Correlation Analysis #### 
+    Correlation matrices demonstrate strong positive relationships between SST, Degree Heating Weeks, hotspots, and bleaching alert areas, supporting the role of sustained thermal stress as a primary driver of coral bleaching.
+
+- #### Thermal Stress and Bleaching Risk #### 
+    Scatter plots and regression analyses show that both higher SST values and increased DHW are associated with larger bleaching alert areas, with evidence of threshold-like behavior once critical temperature limits are exceeded.  
+
+
+## Key Findings ## 
+* Sea surface temperatures in the Florida Keys show a clear long-term upward trend from 1985 to 2025
+* Bleaching risk is strongly seasonal, peaking during the warmest months
+* Specific geographic regions consistently experience higher thermal stress
+* Degree Heating Weeks is a strong predictor of bleaching severity
+* Elevated SST directly corresponds to increased frequency and extent of bleaching alerts
+
+## Project Structure ##
+```text
+Investigating_Coral_Bleaching/
+├── data/
+│   └── Florida_Keys.csv
+├── figs/
+│   └── (generated figures)
+├── scripts/
+│   └── data_cleaning_analysis_and_viz.py
+└── README.md
+```
+
+
+## Reproducibility ## 
+This project is designed for reproducibility. All figures are generated via Python scripts using pandas, matplotlib, and seaborn. Running the analysis script will automatically regenerate all visualizations in the figs/ directory.
+
+## Conclusion ##
+This analysis provides quantitative evidence linking rising sea surface temperatures and prolonged thermal stress to increased coral bleaching risk in the Florida Keys. The results reinforce the urgency of climate mitigation and adaptive reef management strategies to preserve coral reef ecosystems under ongoing ocean warming.  
+
+## References ## 
 [National Oceanic and Atmospheric Administration](https://www.noaa.gov/) (2025). Data in the Classroom: Investigating Coral Bleaching. National Oceanic and Atmospheric Administration, US Department of Commerce.
