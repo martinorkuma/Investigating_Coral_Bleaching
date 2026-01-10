@@ -4,10 +4,13 @@ import matplotlib.pyplot as plt
 import seaborn as sns
 import numpy as np
 from mpl_toolkits.axes_grid1 import make_axes_locatable
+import os 
 from datetime import datetime
+
 
 # load the dataset
 df = pd.read_csv("Florida_Keys.csv")
+FIG_DIR = "figs"
 
 # Display basic information about the dataset
 print("\nDataset Information:")
@@ -16,11 +19,13 @@ df.info()
 print("\nColumn Information:")
 df.head().T
 
-# Data Cleeaning
+# Data Cleaning
 # Convert Date column to datetime format
 df['Date'] = pd.to_datetime(df['Date'], format="%m/%d/%Y")
+df = df.dropna(subset=["Date"]).copy()
 # Extract Month for seasonal analysis
 df['Month'] = df['Date'].dt.month
+df = df.sort_values("Date")
 
 
 # Calculate the Time Series Analysis of Sea Surface Temperature
@@ -29,8 +34,8 @@ sns.lineplot(data=df, x="Date", y="Sea_Surface_Temperature", label="SST")
 plt.xlabel("Year")
 plt.ylabel("Sea Surface Temperature (°C)")
 plt.title("Time Series of Sea Surface Temperature in Florida Keys")
-plt.legend()
-plt.show()
+plt.savefig(f"{FIG_DIR}/sst_time_series.png", dpi=300, bbox_inches="tight")
+plt.close()
 
 
 # Extract the year and calculate the yearly average SST
@@ -50,7 +55,8 @@ plt.ylabel("Sea Surface Temperature (°C)")
 plt.title("Yearly Average Sea Surface Temperature in Florida Keys")
 plt.legend()
 plt.grid(True)  # Optional for better readability
-plt.show()
+plt.savefig(f"{FIG_DIR}/sst_yearly_trend.png", dpi=300, bbox_inches="tight")
+plt.close()
 
 
 # Heatmap of SST & HotSpots (Geospatial)
@@ -61,7 +67,8 @@ plt.colorbar(sc, label="Sea Surface Temperature (°C)")
 plt.xlabel("Longitude")
 plt.ylabel("Latitude")
 plt.title("Geospatial Heatmap of Sea Surface Temperature")
-plt.show()
+plt.savefig(f"{FIG_DIR}/sst_geospatial_heatmap.png", dpi=300, bbox_inches="tight")
+plt.close()
 
 
 # Correlation Analysis
@@ -72,7 +79,8 @@ sns.heatmap(corr_matrix, annot=True, cmap='coolwarm', linewidths=0.5)
 plt.title("Correlation Matrix of Key Variables")
 # Slant the x-axis labels
 plt.xticks(rotation=45)
-plt.show()
+plt.savefig(f"{FIG_DIR}/correlation_matrix.png", dpi=300, bbox_inches="tight")
+plt.close()
 
 
 # Compute the average temperature per month to define color mapping
@@ -89,7 +97,8 @@ plt.xlabel("Month")
 plt.ylabel("Sea Surface Temperature (°C)")
 plt.title("Seasonal Trends in Sea Surface Temperature")
 plt.legend(title="Month", bbox_to_anchor=(1.05, 1), loc='upper left')  # Adjust legend position
-plt.show()
+plt.savefig(f"{FIG_DIR}/sst_seasonal_boxplot.png", dpi=300, bbox_inches="tight")
+plt.close()
 
 
 # Impact of Degree Heating Weeks (DHW) on Coral Bleaching ---
@@ -98,7 +107,8 @@ sns.scatterplot(data=df, x="Degree_Heating_Weeks", y="Bleaching_Alert_Area", alp
 plt.xlabel("Degree Heating Weeks (DHW)")
 plt.ylabel("Bleaching Alert Area")
 plt.title("Impact of DHW on Coral Bleaching")
-plt.show()
+plt.savefig(f"{FIG_DIR}/dhw_vs_bleaching.png", dpi=300, bbox_inches="tight")
+plt.close()
 
 
 # Visualization: Impact of Higher Temperatures on Coral Bleaching ---
@@ -108,4 +118,5 @@ sns.regplot(data=df, x="Sea_Surface_Temperature", y="Bleaching_Alert_Area", scat
 plt.xlabel("Sea Surface Temperature (°C)")
 plt.ylabel("Bleaching Alert Area")
 plt.title("Impact of Higher Temperatures on Coral Bleaching")
-plt.show()
+plt.savefig(f"{FIG_DIR}/sst_vs_bleaching.png", dpi=300, bbox_inches="tight")
+plt.close()
